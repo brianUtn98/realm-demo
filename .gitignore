@@ -131,3 +131,5 @@ dist
 
 */myrealm
 */default.realm.management
+*/default.realm
+*/default.realm.lock

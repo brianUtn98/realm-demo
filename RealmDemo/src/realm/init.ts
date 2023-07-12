@@ -1,6 +1,7 @@
 import path from "path";
 
 import Task from "../models/Task";
+import User from "../models/User";
 
 const init = async () => {
   const app = new Realm.App({
@@ -16,17 +17,30 @@ const init = async () => {
   await app.logIn(credentials);
 
   const realm = await Realm.open({
-    schema: [Task],
+    schema: [Task, User],
     sync: {
       user: app.currentUser!,
       flexible: true,
-      initialSubscriptions: {
-        update(subs, realm) {
-          subs.add(realm.objects(Task));
-        },
-      },
+      // initialSubscriptions: {
+      //   update(subs, realm) {
+      //     subs.add(realm.objects(Task));
+      //     subs.add(realm.objects(User));
+      //   },
+      // },
       onError: console.log,
     },
+  });
+
+  const users = realm.objects(User);
+
+  const tasks = realm.objects(Task);
+
+  await realm.subscriptions.update((subs) => {
+    subs.add(tasks);
+  });
+
+  await realm.subscriptions.update((subs) => {
+    subs.add(users);
   });
 
   realm.addListener("change", (sender) => {

@@ -8,5 +8,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(router);
-app.on("error", (err) => console.log(err));
+app.on("error", (err) => {
+  process.exit(1);
+});
 export default app;

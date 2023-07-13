@@ -31,16 +31,12 @@ class Task extends Realm.Object {
     baseFilePath: path.join(__dirname, "../myrealm"),
   });
 
-  console.log("Default path: ", Realm.defaultPath);
-
   const credentials = Realm.Credentials.emailPassword(
     "brian.gmonroy98@gmail.com",
     "!xr!QAEKi8K4ya!"
   );
 
   const user = await app.logIn(credentials);
-
-  console.log("User: ", user);
 
   const realm = await Realm.open({
     schema: [Task],
@@ -66,4 +62,4 @@ class Task extends Realm.Object {
   });
 })();
 
-console.log("End of file");
+console.log("Listening for changes in Task Realm...");

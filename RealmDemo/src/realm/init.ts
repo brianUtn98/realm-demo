@@ -43,13 +43,13 @@ const init = async () => {
     subs.add(users);
   });
 
-  realm.addListener("change", (sender) => {
-    const objects = sender.objects(Task);
+  // realm.addListener("change", (sender) => {
+  //   const objects = sender.objects(Task);
 
-    console.log("Change detected");
+  //   console.log("Change detected");
 
-    console.log(objects.map((task) => task.toJSON()));
-  });
+  //   console.log(objects.map((task) => task.toJSON()));
+  // });
 
   return realm;
 };
